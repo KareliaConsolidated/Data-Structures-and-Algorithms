@@ -44,56 +44,54 @@ to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
 #=========================# PART A #=========================#
-def get_telephone_type(tel_num):
-	if tel_num.startswith('(0') and tel_num.find(')'):
-		return 'Fixed'
-	elif (tel_num.startswith('7') or tel_num.startswith('8') or tel_num.startswith('9')) and ' ' in tel_num:
-		return 'Mobile'
-	elif (tel_num.startswith('140')):
-		return 'Telemarketers'
-	else:
-		return None
 
-def extract_area_code(tel_num, tel_type):
-	if tel_type == 'Fixed':
-		return tel_num[1:tel_num.find(')')]
-	elif tel_type == 'Mobile':
-		return tel_num[0:4]
-	elif tel_type == 'Telemarketers':
-		return '140'
-	else:
-		return None
+def get_telephone_type(number):
+  if number.startswith('(0') and number.find(')'):
+    return f'Fixed'
+  elif number.startswith('7') or number.startswith('8') or number.startswith('9') and ' ' in number:
+    return 'Mobile'
+  elif number.startswith('140'):
+    return 'Telemarketers'
+  else:
+    None
 
-def extract_receiver_area_codes(calls, caller_prefix, duplicates = False):
-	area_codes = []
-	for call in calls:
-		if call[0].startswith(f"{caller_prefix}"):
-			tel_type = get_telephone_type(call[1])
-			area_code = extract_area_code(call[1], tel_type)
-			if area_code:
-				if duplicates:
-					area_codes.append(area_code)
-				else:
-					if area_code not in area_codes:
-						area_codes.append(area_code)
-	return area_codes
+def extract_tel_code(number, teltype):
+  if teltype == 'Fixed':
+    return number[1:number.find(')')]
+  elif teltype == 'Mobile':
+    return number[0:4]
+  elif teltype == "Telemarketers":
+    return number[0:3]
+  else:
+    return None
 
-print(f"The numbers called by people in Bangalore have codes: {extract_receiver_area_codes(calls,'(080)')}")
+# numbers = ['(022)47410783', '98459 20681', '1408371942']
+# for num in numbers:
+#   teltype = get_telephone_type(num)
+#   print(extract_tel_code(num, teltype))
 
-#=========================# PART B #=========================#
+def extract_receiver_area_code(calls, caller_prefix):
+  area_codes = []
+  for call in calls:
+    if call[0].startswith(f"{caller_prefix}"):
+      get_type = get_telephone_type(call[1])
+      extract_tel = extract_tel_code(call[1], get_type)
+      if extract_tel not in area_codes:
+        area_codes.append(extract_tel)
+  return area_codes
 
-def get_number_of_calls(calls, caller_prefix, receiver_area_code):
-  number_of_calls = 0
-  area_codes = extract_receiver_area_codes(calls, caller_prefix, duplicates=True)
-  for area_code in area_codes:
-    if area_code == receiver_area_code:
-      number_of_calls += 1
-  return (number_of_calls, len(area_codes)) # tuple returned (number of calls for specific area code, total number of calls)
+print(extract_receiver_area_code(calls, '(080)'))
 
-def calc_percentage(ratio):
-  return round(ratio[0] / ratio[1] *100, 2)
+def count_in_state_calls(calls, caller_prefix):
+  count = 0
+  total = 0
+  for call in calls:
+    if call[0].startswith(f"{caller_prefix}"):
+      get_type = get_telephone_type(call[1])
+      total += 1
+      if get_type == 'Fixed' and call[1].startswith(f"{caller_prefix}"):
+          count += 1
+  return round(count / total * 100, 2)
 
-def get_percentage_of_calls(calls, caller_prefix, receiver_area_code):
-  return calc_percentage(get_number_of_calls(calls, caller_prefix, receiver_area_code))
 
-print(f"{get_percentage_of_calls(calls, '(080)', '080')} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+print(count_in_state_calls(calls, '(080)'))
