@@ -25,47 +25,20 @@ Print a message:
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
 
-def get_all_senders(log, duplicates=False):
-    senders = []
-    for record in log:
-        if duplicates:
-            senders.append(record[0])
-        else:
-            if record[0] not in senders:
-                senders.append(record[0])
-    return senders
+def extract_telemarketers(number):
+    if number.startswith('140'):
+        return number
+    return False
 
-def get_caller_receivers(log, sender, duplicates=False):
-    recievers = []
-    for record in log:
-        if record[0] == sender:
-            if duplicates:
-                recievers.append(record[1])
-            else:
-                if record[1] not in recievers:
-                    recievers.append(record[1])
-    return recievers
-
-def get_number_of_received_actions(log, receiver):
-    actions = 0
-    for record in log:
-        if record[1] == receiver:
-            actions += 1
-    return actions
-
-def get_number_of_sent_actions(log, sender):
-    actions = 0
-    for record in log:
-        if record[0] == sender:
-            actions += 1
-    return actions
-
-def get_telemarketers(calls, texts, duplicates=False):
+def identify_outgoing_telemarketers(calls, texts):
+    outgoing_calls = [call[0] for call in calls if extract_telemarketers(call[0])]
+    incoming_calls = [call[1] for call in calls if extract_telemarketers(call[1])]
+    outgoing_text = [text[0] for text in texts if extract_telemarketers(text[0])]
+    incoming_text = [text[1] for text in texts if extract_telemarketers(text[1])]
     telemarketers = []
-    for sender in get_all_senders(calls):
-        actions = get_number_of_received_actions(calls, sender) + get_number_of_received_actions(texts, sender) + get_number_of_sent_actions(texts, sender)
-        if actions == 0:
-            telemarketers.append(sender)
-    return telemarketers
-
-print('These numbers could be telemarketers: \n{}'.format('\n'.join(sorted(get_telemarketers(calls,texts)))))
+    for outgoing in outgoing_calls:
+        if (outgoing not in incoming_calls) and (outgoing not in outgoing_text) and (outgoing not in incoming_text):
+            telemarketers.append(outgoing)
+    telemarketers = '\n'.join(sorted(set(telemarketers)))
+    return f"These numbers could be telemarketers: \n{telemarketers} "
+print(identify_outgoing_telemarketers(calls, texts))
