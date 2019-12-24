@@ -144,6 +144,22 @@ class SLL:
             node = node.next
         return node_values
 
+    def search(self, searchValue):
+        """ Search the linked list for a node with the requested value and return the node. """
+        position_tail = self.head
+        while position_tail.next:
+            if position_tail.data == searchValue:
+                return position_tail
+            position_tail = position_tail.next
+        return None 
+
+    def size(self):
+        position_tail = self.head
+        ll_length = 0
+        while position_tail is not None:
+            position_tail = position_tail.next
+            ll_length += 1
+        return ll_length
 
 sll = SLL()
 print(sll.is_empty())  # True
@@ -169,3 +185,5 @@ print(sll.prepend(10))
 print(sll.to_list())  # [10, 8, 2, 1, 4, 3, 5, 6]
 print(sll.insert(2, 9))
 print(sll.to_list())  # [10, 8, 9, 2, 1, 4, 3, 5, 6]
+print(sll.search(13)) # None
+print(sll.size()) # 9
