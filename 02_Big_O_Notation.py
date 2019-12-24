@@ -18,3 +18,26 @@
 # float	4 bytes
 # double	8 bytes
 # It is also important to note that we will be focusing on just the data space being used and not any of the environment or instructional space.
+import timeit
+############### METHOD 01 ################
+
+def addUpTo01(n):
+	total = 0
+	for i in range(n+1):
+		total += i
+	return total
+
+startf = timeit.default_timer()
+print(addUpTo01(1000000000)) # 21
+stopf = timeit.default_timer()
+print('First addUpTo01 Function Time: ', stopf - startf / 1000)  
+
+############### METHOD 02 ################
+
+def addUpTo02(n):
+	return n * (n + 1) / 2
+# Above 3 Simple Operations are happening regardless of n
+starts = timeit.default_timer()
+print(addUpTo02(1000000000)) # 21
+stops = timeit.default_timer()
+print('Second addUpTo02 Function Time: ', stops - starts / 1000)
