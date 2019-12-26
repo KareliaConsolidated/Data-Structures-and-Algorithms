@@ -10,12 +10,12 @@
 
 def countUniqueValues(sort_arr):
 	if len(sort_arr) == 0: return 0
-	i = 0
+	i=0
 	for j in range(1,len(sort_arr)):
 		if sort_arr[i] != sort_arr[j]:
 			i += 1
 			sort_arr[i] = sort_arr[j]
-	return i + 1
+	return i+1
 
 print(countUniqueValues([1,1,1,1,1,2])) # 2
 print(countUniqueValues([1,1,1,1,1,2,3,3,4,4,12,12])) # 5
