@@ -22,4 +22,3 @@ def is_rotation(A, B):
 	return True
 
 print(is_rotation(A,B))
-
