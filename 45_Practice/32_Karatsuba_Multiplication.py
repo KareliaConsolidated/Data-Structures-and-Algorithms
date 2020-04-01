@@ -11,4 +11,5 @@ def karatsuba(n1,n2):
 	return ((10**n)*a*c) + ((10**(n/2))*((a*d)+(b*c))) + (b*d)
 
 print(int(karatsuba(1234, 5678))) # 7006652
+
 print(int(karatsuba(788952, 123452))) # 97397702304
