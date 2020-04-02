@@ -17,3 +17,6 @@ numarray = [1,2,3,4,5,6,7,8,9,10]
 
 print(BinarySearch(numarray,11)) # -1
 print(BinarySearch(numarray,3)) # 2
+
+# Best Case O(1)
+# Worst and Average Case O(log(n))
