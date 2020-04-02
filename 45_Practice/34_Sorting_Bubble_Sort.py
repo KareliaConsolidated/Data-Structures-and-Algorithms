@@ -10,5 +10,6 @@ def bubble_sort(arr):
 		if noSwaps == True:
 			break
 	return arr
+	
 print(bubble_sort([37,45,29,8])) # 8,29,37,45
 print(bubble_sort([8,29,37,45])) # 8,29,37,45
