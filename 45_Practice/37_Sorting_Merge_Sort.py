@@ -31,7 +31,6 @@ def merge(arr1, arr2):
 # print(merge([1,10,50],[2,14,99,100]))
 
 # Merge Sort Pseudocode
-
 # Break up the array into halves until you have arrays that are empty or have one element.
 # Once you have smaller sorted arrays, merge those arrays with other sorted arrays until you are back at the full length of the array
 # Once the array has been merged back together, return the merged (and sorted !) array.
