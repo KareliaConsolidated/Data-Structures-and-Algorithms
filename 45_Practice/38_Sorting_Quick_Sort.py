@@ -23,3 +23,35 @@
 	# If the pivot is greater than the current element, increment the pivot index variable and then the current element with the element at the pivot index.
 # Swap the starting element(i.e. the pivot) with the pivot index.
 # Return the pivot index.
+
+# QuickSort Pseudocode
+# Call the Pivot Helper on the Array
+# When the helper returns to you the updated pivot index, recursively call the pivot helper on the subarray to the left of that index, and the subarray to the right of that index.
+# Your base case occurs when you consider a subarray with less than 2 elements.
+
+def quickSort(arr):
+	elements = len(arr)
+
+	# Base Case:
+	if elements < 2:
+		return arr
+
+	current_position = 0 # Position of the Pivot Element
+
+	for i in range(1,elements):
+		if arr[i] <= arr[0]:
+			arr[i], arr[current_position] = arr[current_position], arr[i]
+	arr[0], arr[current_position] = arr[current_position], arr[0] # Bring Pivot to Its Appropriate Position
+
+	# Sort the Elements to the Left of the Pivot
+	left = quickSort(arr[0:current_position])
+	# Sort the Elements to the Right of the Pivot
+	right = quickSort(arr[current_position+1:elements])
+	# Merging Everything Together
+	arr = left + [arr[current_position]] + right
+
+	return arr
+
+print(quickSort([4,6,9,1,2,5,3]))
+arr1  = [4,6,9,1,2,5,3]
+print(arr1[0:4])
