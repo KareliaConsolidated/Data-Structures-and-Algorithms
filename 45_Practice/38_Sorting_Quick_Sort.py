@@ -40,6 +40,7 @@ def quickSort(arr):
 
 	for i in range(1,elements):
 		if arr[i] <= arr[0]:
+			current_position += 1
 			arr[i], arr[current_position] = arr[current_position], arr[i]
 	arr[0], arr[current_position] = arr[current_position], arr[0] # Bring Pivot to Its Appropriate Position
 
@@ -53,5 +54,3 @@ def quickSort(arr):
 	return arr
 
 print(quickSort([4,6,9,1,2,5,3]))
-arr1  = [4,6,9,1,2,5,3]
-print(arr1[0:4])
