@@ -58,4 +58,7 @@ def radixSort(nums):
 		nums = [item for sublist in digitBuckets for item in sublist]
 	return nums
 
+
 print(radixSort([23,345,5467,12,2345,9852,147])) # [12, 23, 147, 345, 2345, 5467, 9852]
+
+print(radixSort([123,3245,546337,122,2345,9852,147])) # [122, 123, 147, 2345, 3245, 9852, 546337]
