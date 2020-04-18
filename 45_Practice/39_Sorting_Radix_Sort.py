@@ -25,7 +25,7 @@ def digitCount(num):
 	if num == 0: return 1
 	return math.floor(math.log10(abs(num))) + 1
 
-# print(digitCount(137)) # 2
+# print(digitCount(137)) # 3
 
 # mostDigits(nums) - Given an array of numbers, returns the number of digits in the largest numbers in the list
 # mostDigits([1234, 56, 7]) - 4
@@ -47,3 +47,15 @@ def mostDigits(nums):
 	# Place each number in the corresponding bucket based on its kth digit
 # Replace our existing array with values in our buckets, starting with 0 and going up to 9
 # Return list at the end.
+
+def radixSort(nums):
+	maxDigitCount = mostDigits(nums)
+	for k in range(maxDigitCount):
+		digitBuckets = [[] for _ in range(10)]
+		for i in range(len(nums)):
+			digit = getDigit(nums[i], k)
+			digitBuckets[digit].append(nums[i])
+		nums = [item for sublist in digitBuckets for item in sublist]
+	return nums
+
+print(radixSort([23,345,5467,12,2345,9852,147])) # [12, 23, 147, 345, 2345, 5467, 9852]
