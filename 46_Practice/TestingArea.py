@@ -1,15 +1,21 @@
-def same(arr1,arr2):
-	if len(arr1) != len(arr2):
-		return False
-	
-	squared_count = {num:arr2.count(num) for num in arr2}
+def maxSubarraySum(arr, num):
+	if len(arr) < num: return None
 
-	for i in range(len(arr1)):
-		value_count = arr1.count(arr1[i])
-		if squared_count[arr1[i]**2] != value_count:
-			return False
-	return True
+	maxSum = 0
+	tempSum = 0
 
-print(same([1,2,3],[4,1,9])) # True
-print(same([1,2,3],[1,9])) # False
-print(same([1,2,1],[4,4,1])) # False
+	for i in range(num):
+		maxSum += arr[i]
+
+	tempSum = maxSum
+
+	for j in range(num, len(arr)):
+		tempSum = tempSum - arr[j-num] + arr[j]
+		maxSum = max(tempSum, maxSum)
+	return maxSum
+
+print(maxSubarraySum([2,6,9,2,1,8,5,6,3],3)) # 19
+print(maxSubarraySum([1,2,5,2,8,1,5],4)) # 17
+print(maxSubarraySum([4,2,1,6],1)) # 6
+print(maxSubarraySum([4,2,1,6,2],4)) # 13
+print(maxSubarraySum([],4)) # None
