@@ -1,21 +1,19 @@
-def maxSubarraySum(arr, num):
-	if len(arr) < num: return None
+def search(arr, num):
+	if len(arr) == 0: return -1
+	
+	start = 0
+	end = len(arr) - 1
 
-	maxSum = 0
-	tempSum = 0
+	while start <= end:
+		middle  = (start + end) // 2
+		if arr[middle] < num:
+			start = middle + 1
+		elif arr[middle] > num:
+			end = middle - 1
+		else:
+			return middle
+	return -1
 
-	for i in range(num):
-		maxSum += arr[i]
-
-	tempSum = maxSum
-
-	for j in range(num, len(arr)):
-		tempSum = tempSum - arr[j-num] + arr[j]
-		maxSum = max(tempSum, maxSum)
-	return maxSum
-
-print(maxSubarraySum([2,6,9,2,1,8,5,6,3],3)) # 19
-print(maxSubarraySum([1,2,5,2,8,1,5],4)) # 17
-print(maxSubarraySum([4,2,1,6],1)) # 6
-print(maxSubarraySum([4,2,1,6,2],4)) # 13
-print(maxSubarraySum([],4)) # None
+print(search([1,2,3,4,5,6], 4)) # 3
+print(search([1,2,3,4,5,6], 6)) # 5
+print(search([1,2,3,4,5,6], 11)) # -1	
