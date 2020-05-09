@@ -1,19 +1,15 @@
-def search(arr, num):
-	if len(arr) == 0: return -1
-	
-	start = 0
-	end = len(arr) - 1
+def isSubsequence(substr, fullstr):
+	ptrsub = 0
+	ptrfull = 0
+	while ptrfull < len(fullstr):
+		if substr[ptrsub] == fullstr[ptrfull]:
+			ptrsub += 1
+		if ptrsub == len(substr):
+			return True
+		ptrfull += 1
+	return False
 
-	while start <= end:
-		middle  = (start + end) // 2
-		if arr[middle] < num:
-			start = middle + 1
-		elif arr[middle] > num:
-			end = middle - 1
-		else:
-			return middle
-	return -1
-
-print(search([1,2,3,4,5,6], 4)) # 3
-print(search([1,2,3,4,5,6], 6)) # 5
-print(search([1,2,3,4,5,6], 11)) # -1	
+print(isSubsequence('hello', 'hello world')) # True
+print(isSubsequence('sing', 'sting')) # True
+print(isSubsequence('abc','abracadabra')) # True
+print(isSubsequence('abc','acb')) # False
