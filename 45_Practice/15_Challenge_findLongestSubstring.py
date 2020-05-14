@@ -13,8 +13,9 @@ def findLongestSubstring(stri):
 
 		longest = max(longest, i-start+1)
 		seen[char] = i+1
-	return longest
+	return longest 
 
+	
 print(findLongestSubstring('')) # 0
 print(findLongestSubstring('thisisawesome')) # 6
 print(findLongestSubstring('thecatinthehat')) # 7
