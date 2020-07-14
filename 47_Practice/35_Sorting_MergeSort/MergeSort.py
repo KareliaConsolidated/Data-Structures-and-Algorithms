@@ -21,7 +21,6 @@ def MergeSort(arr):
 	if len(arr) <= 1: return arr
 	mid = len(arr) // 2
 	FirstArr, SecondArr = MergeSort(arr[:mid]), MergeSort(arr[mid:])
-	print(FirstArr, SecondArr)
 	return MergeHelper(FirstArr, SecondArr)
 
 print(MergeSort([5,4,3,1,2]))
