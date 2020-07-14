@@ -17,9 +17,6 @@ def MergeHelper(arr1, arr2):
 
 	return NewArr
 
-# print(MergeHelper([1,10,50],[2,14,99,100]))
-# print(MergeHelper([3],[1,2]))
-
 def MergeSort(arr):
 	if len(arr) <= 1: return arr
 	mid = len(arr) // 2
@@ -28,3 +25,4 @@ def MergeSort(arr):
 	return MergeHelper(FirstArr, SecondArr)
 
 print(MergeSort([5,4,3,1,2]))
+
