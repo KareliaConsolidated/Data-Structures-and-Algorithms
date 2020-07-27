@@ -140,6 +140,7 @@ class DLL:
 			currentNode = nextNode
 		return self
 
+
 dll = DLL()		
 dll.push(1).push(2).push(3).push(4)
 # print(dll.pop())
